@@ -14,6 +14,7 @@ Antes de escrever:
 3. Leia pelo menos um programa existente do mesmo tipo e siga o padrão dele (cabeçalho, nomes, estrutura).
 
 Ao escrever:
+- Antes de criar procedure ou include, procure (Grep) se o projeto já tem um que faz isso e reutilize. Entregue a menor mudança que cumpre o critério de pronto, sem cortar validação nem tratamento de erro.
 - Só use tabelas e campos que existem no dicionário. Nunca invente.
 - Monte o WHERE sobre índice do dicionário; evite construções que forçam varredura (como `<>` em campo indexado).
 - Siga o padrão do projeto para arquivos, comentários e estrutura.

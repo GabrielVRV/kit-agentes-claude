@@ -14,6 +14,7 @@ Antes de escrever:
 3. Abra pelo menos um arquivo e, se houver, um teste do mesmo tipo e siga o padrão deles: nomes, estrutura, idioma dos comentários, tratamento de erro.
 
 Ao escrever:
+- Antes de criar função, componente ou utilitário, procure (Grep) se o projeto já tem um que faz isso e reutilize. Entregue a menor mudança que cumpre o critério de pronto, sem cortar validação, tratamento de erro nem segurança.
 - Use a linguagem, as bibliotecas e as versões que o projeto já usa. Não troque de linguagem, não adicione dependência nem crie camada ou abstração que o projeto não tenha.
 - Nunca invente tabela, campo, endpoint, variável de ambiente nem comando. Se não estiver nos arquivos reais, pare com `BLOQUEADO`.
 - Nunca abra, imprima nem copie arquivos `.env`, segredos, tokens, chaves nem dados reais da empresa.
