@@ -1,0 +1,15 @@
+#!/bin/sh
+# Hook commit-msg: deixa o commit só com o autor configurado no git.
+# Remove da mensagem os trailers de co-autoria e as assinaturas de ferramentas de IA.
+arq="$1"
+[ -f "$arq" ] || exit 0
+tmp="$(mktemp "${TMPDIR:-/tmp}/commitmsg.XXXXXX")" || exit 0
+
+# Tira Co-Authored-By, Claude-Session e a linha "Generated with ... Claude".
+grep -v -i -E '^[[:space:]]*(co-authored-by:|claude-session:)|generated with \[?claude' "$arq" > "$tmp"
+
+# Tira as linhas em branco que sobraram no final da mensagem.
+awk '{ l[NR] = $0 } END { n = NR; while (n > 0 && l[n] ~ /^[[:space:]]*$/) n--; for (i = 1; i <= n; i++) print l[i] }' "$tmp" > "$arq"
+
+rm -f "$tmp"
+exit 0

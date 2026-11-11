@@ -1,0 +1,27 @@
+# Trecho para colar no pyproject.toml de um backend Python com Clean Architecture.
+# Troque <pacote> pelo nome do pacote raiz (a pasta dentro de src/).
+# Instale como dependência de desenvolvimento: import-linter, ruff, mypy, pytest.
+# Rode com: lint-imports
+
+[tool.importlinter]
+root_package = "<pacote>"
+include_external_packages = true
+
+# Camadas de cima podem importar as de baixo, nunca o contrário.
+# Presentation e infrastructure são adaptadores irmãos: não se conhecem.
+[[tool.importlinter.contracts]]
+name = "Clean Architecture: regra de dependência"
+type = "layers"
+layers = [
+    "<pacote>.main | <pacote>.cli",
+    "<pacote>.presentation | <pacote>.infrastructure",
+    "<pacote>.application",
+    "<pacote>.domain",
+]
+
+# O núcleo (domínio + aplicação) não conhece framework.
+[[tool.importlinter.contracts]]
+name = "Núcleo (domínio + aplicação) livre de frameworks"
+type = "forbidden"
+source_modules = ["<pacote>.domain", "<pacote>.application"]
+forbidden_modules = ["fastapi", "starlette", "pydantic", "pydantic_settings", "uvicorn"]
