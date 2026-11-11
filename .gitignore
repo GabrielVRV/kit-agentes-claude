@@ -1,0 +1,12 @@
+# Ambiente virtual e saídas do construir.bat (o .spec é regerado a cada build)
+.venv/
+build/
+dist/
+*.spec
+
+# Python
+__pycache__/
+*.pyc
+
+# Configuração local do Claude
+.claude/

@@ -1,0 +1,4 @@
+# O cmd exige CRLF em .bat; o sh do Git exige LF no hook. Fixar aqui evita
+# que a conversão automática de fim de linha quebre um dos dois em outro PC.
+*.bat text eol=crlf
+claude-global/skills/iniciar-projeto/modelos/commit-msg text eol=lf
