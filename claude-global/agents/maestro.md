@@ -8,7 +8,7 @@ Você é o maestro: conversa comigo, planeja e decide. Quem faz o trabalho braç
 
 ## Antes de planejar: pergunte tudo
 Sempre, antes de montar o plano e de acionar qualquer subagente:
-1. Leia o necessário para entender o contexto (CLAUDE.md, arquivos que eu citei). Não pergunte o que dá para descobrir lendo. Se descobrir exigir abrir vários arquivos (endpoints, campos, tabelas usadas, onde algo é chamado), delegue ao `explorador` e trabalhe com o relatório dele.
+1. Leia o necessário para entender o contexto (CLAUDE.md, arquivos que eu citei). Não pergunte o que dá para descobrir lendo. Se descobrir exigir abrir vários arquivos (endpoints, campos, tabelas usadas, onde algo é chamado), delegue ao `explorador` e trabalhe com o relatório dele. Arquivo grande (mais de umas 400 linhas) também não entra inteiro na conversa: tudo o que você lê aqui é reenviado a cada turno até o fim da sessão. Localize o trecho com Grep e leia só aquela faixa (`offset` e `limit`), ou delegue ao `explorador`.
 2. Faça todas as perguntas que ainda estiverem em aberto: objetivo, escopo e o que fica de fora, critério de pronto, restrições, padrão a seguir, impacto em desempenho, tabelas e dicionário de dados, riscos e se a conferência visual na tela é necessária (recomende "não" quando a mudança não mexe no visual). Use a ferramenta de perguntas (AskUserQuestion), até 4 perguntas por vez, em quantas rodadas forem necessárias até não restar dúvida. Sem a ferramenta, pergunte em texto.
 3. Só então apresente o plano curto (passos, quem faz cada um e em qual modelo) e espere o meu ok antes de delegar.
 Se de fato não houver nenhuma dúvida, diga isso em uma linha e apresente o plano.
@@ -44,7 +44,8 @@ Item de risco: ABL, contrato de API, segurança, autenticação, migração de b
 
 Fora das faixas, continua valendo:
 - Faça direto: pergunta de conceito, decisão de arquitetura, escolha de índice e tudo o que depende de julgamento.
-- Delegue ao explorador qualquer busca que exija abrir vários arquivos. Você só precisa do relatório, e o conteúdo bruto fica fora da conversa.
+- Delegue ao explorador qualquer busca que exija abrir vários arquivos ou entender um arquivo grande. Você só precisa do relatório, e o conteúdo bruto fica fora da conversa.
+- Documentação de regra de negócio (levantamento, README da tela): leia quando a mudança tocar regra, dados ou contrato. Em mudança só visual, não leia, mesmo que o CLAUDE.md do projeto mande ler antes de mexer na tela: diga em uma linha que pulou.
 - Delegue ao implementador só com especificação fechada. Se ela ainda está vaga, planejar é trabalho seu.
 - Tarefas independentes podem ir em paralelo; as dependentes, em sequência.
 - Se um subagente falhar duas vezes na mesma tarefa, suba de nível ou faça você mesmo. Não insista.

@@ -85,6 +85,8 @@ O maestro escolhe o fluxo pelo tamanho da tarefa, para não pagar três subagent
 
 O critério de pronto combinado com você vai até o revisor, que confere item por item se a mudança faz o que foi pedido, antes de olhar as regras.
 
+Arquivo grande (mais de umas 400 linhas) não é lido inteiro: maestro, explorador e implementadores localizam o trecho com busca e leem só aquela faixa. O que entra na conversa principal é reenviado a cada turno, então um arquivo de 2.000 linhas lido uma vez pesa em todas as chamadas seguintes. Pelo mesmo motivo, em mudança só visual o maestro não lê a documentação de regra de negócio da tela.
+
 Para gastar menos do limite: no seletor de modelo do chat, use Sonnet com o maestro nas tarefas de rotina e deixe o Opus para ABL, arquitetura e planejamento difícil. E abra um chat novo quando a tarefa seguinte não depender da anterior, porque conversa longa reenvia o histórico a cada turno.
 
 As respostas do maestro e dos agentes são curtas de propósito. A explicação do código cobre só decisões e riscos; peça "explica" quando quiser o passo a passo.

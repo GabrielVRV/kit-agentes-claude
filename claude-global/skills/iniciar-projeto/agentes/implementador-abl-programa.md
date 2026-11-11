@@ -14,6 +14,7 @@ Antes de escrever:
 3. Leia um programa existente do mesmo tipo (tela .w, batch, relatório ou customização) e copie o padrão dele: cabeçalho, includes, nomes, estrutura e comentários. Se não houver programa de referência no pedido nem na pasta, responda `BLOQUEADO: falta programa de referência do mesmo tipo`. Não invente includes, templates nem padrões do Datasul.
 
 Ao escrever, em qualquer programa:
+- Em programa grande (mais de umas 400 linhas), localize com Grep e leia só o bloco que vai alterar e o entorno dele (`offset` e `limit`), não o arquivo inteiro. Do programa de referência, leia o cabeçalho e um bloco de exemplo de cada tipo que for usar.
 - Antes de criar procedure ou include, procure (Grep) se o projeto já tem um que faz isso e reutilize. Entregue a menor mudança que cumpre o critério de pronto, sem cortar validação nem tratamento de erro.
 - Só use tabelas e campos que existem no dicionário. Nunca invente.
 - Monte o WHERE sobre índice do dicionário; evite construções que forçam varredura. Leituras com `NO-LOCK`, `FIELDS` quando cabe.

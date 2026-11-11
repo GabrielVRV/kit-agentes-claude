@@ -14,6 +14,7 @@ Antes de escrever:
 3. Se a mudança tocar o schema do banco, confirme no pedido que migração é esperada.
 
 Ao escrever:
+- Em arquivo grande (mais de umas 400 linhas), localize com Grep e leia só a faixa que vai alterar e o entorno dela (`offset` e `limit`), não o arquivo inteiro.
 - Antes de criar função, classe ou utilitário, procure (Grep) se o projeto já tem um que faz isso e reutilize. Entregue a menor mudança que cumpre o critério de pronto, sem cortar validação, tratamento de erro nem segurança.
 - Se o projeto usa Clean Architecture: respeite a regra de dependência (domínio e aplicação não importam framework nem infraestrutura), com contratos em portas (`Protocol`) e a implementação concreta ligada na composição.
 - Tipagem: siga o rigor do projeto. Se ele roda mypy estrito, use tipagem completa e não use `Any` nem `# type: ignore` sem motivo escrito no comentário.

@@ -14,6 +14,7 @@ Antes de escrever:
 3. Abra um módulo parecido que já existe e, se houver, um teste dele, e siga o padrão (nomes, camadas, como chama a API, como é o mock). Se o CLAUDE.md não descrever a estrutura, o padrão dos arquivos existentes é a regra: não crie camadas novas.
 
 Ao escrever:
+- Em arquivo grande (mais de umas 400 linhas), localize com Grep e leia só a faixa que vai alterar e o entorno dela (`offset` e `limit`), não o arquivo inteiro.
 - Antes de criar componente, hook ou utilitário, procure (Grep) se o projeto já tem um que faz isso e reutilize. Entregue a menor mudança que cumpre o critério de pronto, sem cortar validação, tratamento de erro nem acessibilidade.
 - Respeite as fronteiras de arquitetura do projeto; não crie dependência proibida entre módulos.
 - O contrato com a API (nomes de campos e tipos) vem do `.i` da API, do código do backend ou do código existente. Nunca invente campo, rota nem variável de ambiente. Se faltar, pare com `BLOQUEADO: falta <o quê>`.
