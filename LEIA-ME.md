@@ -161,9 +161,20 @@ uipro init --ai claude
 ```
 O `--dry-run` só mostra o que seria feito, sem gravar nada.
 
-- **graphify (teste opcional, fora do setup).** Antes de testar, confira em docs.graphify.com se Progress ABL é suportado. Não use o modo `--strict`, porque ele pode negar `Grep` e `Read` e quebrar o explorador.
+Em projeto de design livre, quem usa a ui-ux-pro-max é o maestro, no planejamento: ele escreve as decisões de design no pedido do `implementador-react`, que não tem acesso a skills.
 
-- **Descartadas:** planning-with-files (hooks reinjetam o plano em todo turno e há um gate no Stop), claude-mem (segundo agente gasta tokens e o conteúdo do código passa pelo provedor escolhido), superpowers (conflita com o maestro e o TDD obrigatório combina mal com ABL), taste-skill (só para site institucional) e emilkowalski/skills (animação, só para projeto de design livre).
+- **Descartadas** (reavaliadas lendo cada repositório):
+  - **graphify:** a lista de linguagens da documentação não inclui Progress ABL (`.p`, `.w`, `.i`; o `.cls` listado é Salesforce Apex). Em Python e React funcionaria, mas instala hooks que interceptam `Read` e `Grep`, e o explorador não tem como consultar o grafo.
+  - **claude-mem:** hooks em toda chamada de ferramenta, um segundo agente que consome o plano ou um provedor externo, e telemetria ligada por padrão.
+  - **superpowers:** fluxo obrigatório (brainstorm, worktree, plano, TDD) que conflita com o maestro; o TDD obrigatório combina mal com ABL, que não compila aqui.
+  - **caveman:** estilo telegráfico baseado em inglês controlado, ativo em toda sessão e nos subagentes, com cerca de 1.160 tokens de regras; no teste do próprio autor, "responda de forma concisa" ficou quase igual. O maestro já tem regra de resposta curta.
+  - **ponytail:** plugin ativo em toda sessão; os ganhos divulgados são do próprio autor.
+  - **vibe-coding-toolkit:** pacote que instala vários dos itens acima, voltado a Next.js.
+  - **taste-skill:** só para site institucional, e tem um gate no Stop que segura a tarefa por até três rodadas.
+  - **emilkowalski/skills:** animação; só faria sentido em projeto de design livre, instalada por projeto.
+  - **planning-with-files:** hooks reinjetam o plano em todo turno e há um gate no Stop.
+
+  Três ideias desses projetos foram incorporadas direto nos agentes, sem instalar nada: reutilizar antes de criar e entregar a menor mudança completa (ponytail), achar a causa raiz antes de corrigir bug e conferir o critério de pronto antes de dizer que terminou (superpowers).
 
 ## Ajustes
 - Modelo de cada agente: campo `model` no topo do arquivo (`haiku`, `sonnet`, `opus`).
