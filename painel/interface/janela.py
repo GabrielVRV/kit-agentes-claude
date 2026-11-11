@@ -21,6 +21,8 @@ LINHAS_DO_DIARIO = 6
 VARIAVEL_PASTA_CLAUDE = "CLAUDE_CONFIG_DIR"
 NOME_PASTA_BACKUP = "backups-kit-agentes"
 NOME_PASTA_PREFERENCIAS = "kit-agentes-claude"
+CAMINHO_DO_ICONE = Path("painel") / "recursos" / "icone.ico"
+ID_DO_APLICATIVO = "GabrielVRV.KitAgentesClaude"
 
 
 def _pasta_claude() -> Path:
@@ -38,6 +40,30 @@ def _texto_da_origem(kit: Kit) -> str:
         return f"Kit lido de: {kit.raiz}"
     gerado = datetime.fromtimestamp(Path(sys.executable).stat().st_mtime)
     return f"Kit embutido neste executável (gerado em {gerado:%d/%m/%Y %H:%M})"
+
+
+def _caminho_do_icone() -> Path:
+    # No executável os recursos são extraídos para a pasta temporária do PyInstaller.
+    base = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parents[2]))
+    return base / CAMINHO_DO_ICONE
+
+
+def _identificar_na_barra_de_tarefas() -> None:
+    """Sem um id próprio, o Windows agrupa a janela com o Python e mostra o ícone dele."""
+    try:
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(ID_DO_APLICATIVO)
+    except (AttributeError, OSError):
+        pass
+
+
+def _aplicar_icone(raiz: tk.Tk) -> None:
+    icone = _caminho_do_icone()
+    if not icone.exists():
+        return
+    try:
+        raiz.iconbitmap(default=str(icone))
+    except tk.TclError:
+        pass  # Ícone é enfeite: se o sistema recusar o arquivo, a janela abre com o padrão.
 
 
 def _deixar_nitido_em_tela_de_alta_resolucao() -> None:
@@ -80,8 +106,10 @@ def montar_janela(raiz: tk.Tk, kit: Kit, pasta_claude: Path, arquivo_projetos: P
 
 def iniciar() -> None:
     _deixar_nitido_em_tela_de_alta_resolucao()
+    _identificar_na_barra_de_tarefas()
     raiz = tk.Tk()
     raiz.title(TITULO)
+    _aplicar_icone(raiz)
     kit = localizar_kit()
     if kit is None:
         raiz.withdraw()

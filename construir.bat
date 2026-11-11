@@ -21,7 +21,9 @@ rem Nao gera executavel se algum teste falhar.
 
 .venv\Scripts\pyinstaller --noconfirm --clean --onefile --windowed ^
     --name KitAgentesClaude ^
+    --icon "painel\recursos\icone.ico" ^
     --add-data "claude-global;claude-global" ^
+    --add-data "painel\recursos;painel\recursos" ^
     iniciar_painel.pyw || goto :erro
 
 echo.
